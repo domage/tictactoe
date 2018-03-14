@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/domage/tictactoe/game"
-	"github.com/domage/tictactoe/sockets"
+	"github.com/domage/tictactoe/rpc"
 )
 
 var g *game.Game
@@ -39,19 +39,23 @@ func main() {
 
 	// If the connect flag is set, go into client mode.
 	if *connect != "" {
-		err := sockets.StartClient()
+		/*err := sockets.StartClient()
 		if err != nil {
 			log.Println("Error:" + fmt.Sprint(err))
-		}
+		}*/
+		rpc.StartClient()
+		//rpc.StartServer()
 		log.Println("Client done.")
 		return
 	}
 
 	// Else go into server mode.
-	err := sockets.StartServer()
-	if err != nil {
-		log.Println(err)
-	}
+	// err := sockets.StartServer()
+	rpc.StartServer()
+	//rpc.StartClient()
+	//if err != nil {
+	//	log.Println(err)
+	//}
 
 	log.Println("Server done.")
 }
